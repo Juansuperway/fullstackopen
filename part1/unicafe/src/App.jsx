@@ -9,10 +9,13 @@ const Button = (props) => {
     </div>
   )
 }
-const StatisticsLine = (props) => {
+const StatisticLine = (props) => {
   return (
-      <p>{props.text}: {props.value}</p>
-  )
+    <tr>
+      <td>{props.text}</td> 
+      <td>{props.value}</td>
+    </tr>
+    )
 }
 const Statistics = (props) => {
   console.log(props)
@@ -28,20 +31,22 @@ const Statistics = (props) => {
   return (
     <div>
       <h2>Statistics</h2>
-        <StatisticsLine text="Good" value={props.good} />
-        <StatisticsLine text="Neutral" value={props.neutral} />
-        <StatisticsLine text="Bad" value={props.bad} />
-        <StatisticsLine text="All" value={props.all} />
-        <StatisticsLine text="Average" value={props.average} />
-        <StatisticsLine text="Positive" value={props.positive + "%"} />
-        
-      
+      <table>
+      <tbody>
+          <StatisticLine text="Good" value={props.good} />
+          <StatisticLine text="Neutral" value={props.neutral} />        
+          <StatisticLine text="Bad" value={props.bad} />        
+          <StatisticLine text="All" value={props.all} />        
+          <StatisticLine text="Average" value={props.average} />
+          <StatisticLine text="Positive" value={props.positive + "%"} />
+      </tbody>
+      </table>
     </div>
   )
 }
 
 const App = () => {
-  // guarda los clics de cada botón en su propio estado
+  
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
