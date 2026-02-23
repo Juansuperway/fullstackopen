@@ -1,34 +1,36 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const Button = (props) => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <button onClick={props.handleClick}>
+        {props.text}
+      </button>
+    </div>
+  )
+}
+
+const App = () => {
+  // guarda los clics de cada botón en su propio estado
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const goodCount = good
+  const neutralCount = neutral
+  const badCount = bad
+  return (
+    <div>
+      <h1>Give feedback</h1>
+      <br/>
+      <Button handleClick={() => setGood(good + 1)} text="Good"/>
+      <Button handleClick={() => setNeutral(neutral + 1)} text="Neutral"/>
+      <Button handleClick={() => setBad(bad + 1)} text="Bad"/>
+      
+
+      <p>Good: {goodCount}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+    </div>
   )
 }
 
