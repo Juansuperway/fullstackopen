@@ -45,7 +45,6 @@ const Statistics = (props) => {
   )
 }
 
-
 const App = () => {
   
   const [good, setGood] = useState(0)
