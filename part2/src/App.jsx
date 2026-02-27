@@ -1,4 +1,4 @@
-const Header = (props) => <h1>{props.course}</h1>
+const Header = (props) => <h2>{props.course}</h2>
 
 const Content = (props) => (
     props.parts.map((part) => {
@@ -79,6 +79,7 @@ const App = () => {
 ]
 
   return (<div>
+    <h1>Web development curriculum</h1>
       {course.map(c => 
         <Course key={c.id} course={c} />
       )}
