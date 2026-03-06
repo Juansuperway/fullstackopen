@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from "axios"
-import persons from "./db.json"
+import personsService from './services/persons'
 
 const Filter = (props) => {
   return (
@@ -48,15 +47,13 @@ const App = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+    personsService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
-  console.log('render', persons.length, 'persons')
+  //console.log(persons)
 
   const handlePersonChange = (event) => {
     setNewName(event.target.value)
@@ -77,11 +74,11 @@ const App = () => {
       alert(`${newName} is already added to phonebook`)
       setNewName('')
     } else {
-      axios
-        .post('http://localhost:3001/persons', personObject)
-        .then(response => {
-          console.log('this is response.data:',response.data)
-          setPersons(persons.concat(response.data))
+      personsService
+        .create(personObject)
+        .then(returnedPerson => {
+          console.log('this is response.data:',returnedPerson)
+          setPersons(persons.concat(returnedPerson))
           setNewName('')
     })}
   }

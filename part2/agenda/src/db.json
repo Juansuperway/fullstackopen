@@ -21,14 +21,24 @@
       "id": "4"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Juan Sanchez",
       "number": "657372943"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Jose Sanchez",
       "number": "534563633"
+    },
+    {
+      "id": "8612",
+      "name": "ernesto castro",
+      "number": "435245245"
+    },
+    {
+      "id": "943d",
+      "name": "mile",
+      "number": "435245246"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
