@@ -33,9 +33,10 @@ const Persons = (props) => {
           .map((person) => (
             <p key={person.id}>
               {person.name} - {person.number}
-            </p>
+              <button onClick={() => props.handleDelete(person.id, person.name)}>X</button>
+            </p> 
           ))
-        }
+        } 
         </div>
       )
 }
@@ -87,6 +88,20 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  const deleteFunction = (id, name) => {
+    if (window.confirm(`Delete ${name}?`)) {
+    personsService
+      .remove(id)
+      .then(deletdPerson => {
+        setPersons(persons.filter(p => p.id !== id))
+      })
+      .catch(error => {
+        console.error("Failed to delete:", error)
+      })
+    }
+  }
+    
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -102,7 +117,8 @@ const App = () => {
       />
       </section>
       <h2>Numbers</h2>
-      <Persons persons={persons} search={search}/>
+      <Persons persons={persons} search={search} handleDelete={deleteFunction}/>
+      
       
     </div>
   )
