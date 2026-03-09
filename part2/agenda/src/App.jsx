@@ -85,11 +85,18 @@ const App = () => {
             )
             setNewName('')
             setNewNumber('')
-            setMessage(`${personToUpdate.name}'s number was updated.`)
+            setMessage({text: `${personToUpdate.name}'s number was updated.`, type: 'success'})
               setTimeout(() => {
                 setMessage(null)
         }, 5000)
-   
+          
+        })
+          .catch(error => {
+            setPersons(prevPersons => prevPersons.filter(p => p.id !== personToUpdate.id))
+            setMessage({ text: `${personToUpdate.name} is not available`, type: 'error' })
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
           })
       }
     } else {
@@ -101,10 +108,11 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           const nameToShow = newName
-          setMessage(`Added ${nameToShow}`)
+          setMessage({ text: `Added ${nameToShow}`, type: 'success' })
             setTimeout(() => {
               setMessage(null)
         }, 5000)
+        
        
     })
 
