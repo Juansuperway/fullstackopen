@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import personsService from './services/persons'
+import Notification from './component/Notification'
 
 const Filter = (props) => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     personsService
@@ -77,9 +79,17 @@ const App = () => {
         personsService
           .update(personToUpdate.id, {...personToUpdate, number: newNumber })
           .then(updatedPerson => {
+            console.log("UPDATED PERSON:", updatedPerson)
             setPersons(
               persons.map(p => p.id !== personToUpdate.id ? p : updatedPerson)
             )
+            setNewName('')
+            setNewNumber('')
+            setMessage(`${personToUpdate.name}'s number was updated.`)
+              setTimeout(() => {
+                setMessage(null)
+        }, 5000)
+   
           })
       }
     } else {
@@ -89,7 +99,16 @@ const App = () => {
           console.log('this is response.data:',returnedPerson)
           setPersons(persons.concat(returnedPerson))
           setNewName('')
-    })}
+          setNewNumber('')
+          const nameToShow = newName
+          setMessage(`Added ${nameToShow}`)
+            setTimeout(() => {
+              setMessage(null)
+        }, 5000)
+       
+    })
+
+  }
   }
 
   const handlefilterPersons = (event) => {
@@ -112,6 +131,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message}/>
       <Filter value={search} onChange={handlefilterPersons}/>
       <section>
         <h2>Add a new</h2>
