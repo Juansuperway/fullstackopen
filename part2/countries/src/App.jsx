@@ -1,12 +1,7 @@
 import {useState, useEffect} from 'react'
-
-const Filter = (props) => {
-  return (
-    <div>
-        Find countries <input value={props.value} onChange={props.onChange}/>
-      </div>
-  )
-}
+import Filter from './components/Filter.jsx'
+import CountryList from './components/CountryList.jsx'
+import CountryDetail from './components/CountryDetail.jsx'
 
 const App = () => {
 
@@ -28,25 +23,15 @@ const App = () => {
 
   console.log(filteredCountries.length)
 
-  let content = ''
+  let content = null
 
   if (filteredCountries.length > 10) {
     content = 'Too many matches, specify another filter'
   } else if (filteredCountries.length >= 2 && filteredCountries.length <= 10) {
-    content = filteredCountries.map((country) => (
-      <p key={country.cca3}>{country.name.common}</p>)
-  )} else if (filteredCountries.length === 1) {
+    content = <CountryList countries={filteredCountries} />
+  } else if (filteredCountries.length === 1) {
       let country = filteredCountries[0]
-      content = <div>
-        <h1>{country.name.common}</h1>
-        <p >Capital: {country.capital[0]}</p>
-        <h2>Languages</h2>
-        <ul>
-        {Object.values(country.languages).map((language) => 
-          <li key={language}>{language}</li>)}
-        </ul>
-        <img alt={`${country.name.common} flag`} src={country.flags.png}/>
-        </div>    
+      content = <CountryDetail country={country} />
   }
 
   
