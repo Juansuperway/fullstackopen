@@ -14,11 +14,13 @@ const App = () => {
       .then((data) => setCountries(data))
       .catch((error) => console.log(error))
   }, [])
+
   
   const handlefilterCountry = (event) => {
     setSearch(event.target.value)
   }
 
+  const handleShow = (name) => setSearch(name)
   const filteredCountries = countries.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()))
 
   console.log(filteredCountries.length)
@@ -28,10 +30,10 @@ const App = () => {
   if (filteredCountries.length > 10) {
     content = 'Too many matches, specify another filter'
   } else if (filteredCountries.length >= 2 && filteredCountries.length <= 10) {
-    content = <CountryList countries={filteredCountries} />
+    content = <CountryList countries={filteredCountries} onShow={handleShow}/>
   } else if (filteredCountries.length === 1) {
       let country = filteredCountries[0]
-      content = <CountryDetail country={country} />
+      content = <CountryDetail country={country} weather={country}/>
   }
 
   
