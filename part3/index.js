@@ -35,8 +35,10 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
+    const now = new Date()
+    const formattedDate = now.toString()
     response.send(`<p>Phonebook has info for ${persons.length} people</p>
-        <p>>/p>`)
+        <p>${formattedDate}</p>`)
 })
 
 
