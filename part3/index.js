@@ -1,7 +1,9 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 
 app.use(express.json())
 morgan.token('body', (request) => JSON.stringify(request.body))
@@ -88,8 +90,8 @@ app.post('/api/persons', (request, response) => {
   persons = persons.concat(person)
 
   
-  response.json(persons)
-  //console.log(request.body)
+  response.json(person)
+  console.log(request.body)
   
 })
 
