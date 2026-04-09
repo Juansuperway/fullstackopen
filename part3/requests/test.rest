@@ -1,0 +1,1 @@
+GET https://fullstackopen-mmbg.onrender.com/api/persons
