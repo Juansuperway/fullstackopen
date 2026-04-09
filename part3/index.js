@@ -35,8 +35,10 @@ let persons = [
     }
 ]
 
-app.get('/', (request, response) => {
-    response.send(`<h1>Hello World!</h1>`)
+const path = require('path')
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
 })
 
 app.get('/api/persons', (request, response) => {
